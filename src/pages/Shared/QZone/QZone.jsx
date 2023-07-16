@@ -8,9 +8,9 @@ const QZone = () => {
       <div className="bg-secondary bg-opacity-25 text-center py-4 my-4">
         <h4 className="mb-4">Q-Zone</h4>
         <div>
-          <img className="mb-4" src={qzone1} alt="" />
-          <img className="mb-4" src={qzone2} alt="" />
-          <img className="mb-2" src={qzone3} alt="" />
+          <img className="mb-4 img-fluid" src={qzone1} alt="" />
+          <img className="mb-4 img-fluid" src={qzone2} alt="" />
+          <img className="mb-2 img-fluid" src={qzone3} alt="" />
         </div>
       </div>
     );

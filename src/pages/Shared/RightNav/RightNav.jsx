@@ -3,6 +3,7 @@ import { Button, ListGroup } from 'react-bootstrap';
 import { FaGoogle, FaGithub,FaFacebook,FaTwitter, FaInstagram } from "react-icons/fa";
 import QZone from '../QZone/QZone';
 import bg from "../../../assets/bg.png";
+import './RightNav.css';
 
 const RightNav = () =>{
     return (
@@ -32,7 +33,7 @@ const RightNav = () =>{
         </div>
         <QZone />
         <div className="">
-          <img className="position-absolute" src={bg} alt="" />
+          <img className="position-absolute rightnav-bg img-fluid" src={bg} alt="" />
           <div className="position-relative pt-4 text-center">
             <h2 className="text-white fs-1 lh-sm fw-semibold  pt-5">
               Create an<br></br> Amazing<br></br> Newspaper

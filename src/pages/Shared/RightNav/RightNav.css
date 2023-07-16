@@ -1,0 +1,10 @@
+.rightnav-bg{
+    width: 308px !important;
+    height: 500px;
+}
+@media (max-width: 768px) {
+   .rightnav-bg{
+    width: 365px !important;
+    margin: 0 auto;
+   }
+  }
