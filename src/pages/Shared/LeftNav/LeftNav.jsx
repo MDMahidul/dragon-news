@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ActiveLink from '../ActiveLink/ActiveLink';
+import { Nav } from 'react-bootstrap';
 
 const LeftNav = () =>{
     const [categories,setCategories] = useState([]);
@@ -10,17 +12,23 @@ const LeftNav = () =>{
             .then(data=>setCategories(data))
             .catch(error=>console.error(error));
     },[])
-    return(
-        <div>
-            <h4>All Category</h4>
-           <div className='ps-4'>
-            {
-                    categories.map(category=><p key={category.id}>
-                        <Link to={`/category/${category.id}`} className='text-decoration-none text-secondary'>{category.name}</Link>
-                    </p>)
-                }
-           </div>
+    return (
+      <div>
+        <h4>All Category</h4>
+        <div className="ps-4 mt-4">
+          {categories.map((category) => (
+            <p key={category.id}>
+              <Nav.Link>
+                <ActiveLink
+                  to={`/category/${category.id}`}
+                >
+                  {category.name}
+                </ActiveLink>
+              </Nav.Link>
+            </p>
+          ))}
         </div>
+      </div>
     );
 };
 
