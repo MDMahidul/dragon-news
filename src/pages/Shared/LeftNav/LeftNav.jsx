@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ActiveLink from '../ActiveLink/ActiveLink';
 import { Nav } from 'react-bootstrap';
+import LeftNavBelowItems from './LeftNavBelowItems';
 
 const LeftNav = () =>{
     const [categories,setCategories] = useState([]);
@@ -28,6 +29,7 @@ const LeftNav = () =>{
             </p>
           ))}
         </div>
+        <LeftNavBelowItems/>
       </div>
     );
 };
