@@ -19,13 +19,13 @@ const LeftNav = () =>{
         <div className="ps-4 mt-4">
           {categories.map((category) => (
             <p key={category.id}>
-              <Nav.Link>
+    
                 <ActiveLink
                   to={`/category/${category.id}`}
                 >
                   {category.name}
                 </ActiveLink>
-              </Nav.Link>
+            
             </p>
           ))}
         </div>

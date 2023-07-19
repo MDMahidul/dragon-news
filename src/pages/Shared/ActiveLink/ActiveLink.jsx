@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const ActiveLink = ({to,children}) => {
     return (
-      <div>
+
         <NavLink
           to={to}
           className={({ isActive }) =>
@@ -14,7 +14,7 @@ const ActiveLink = ({to,children}) => {
         >
           {children}
         </NavLink>
-      </div>
+    
     );
 };
 
