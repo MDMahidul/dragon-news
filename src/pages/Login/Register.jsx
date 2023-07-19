@@ -7,6 +7,7 @@ const Register = () => {
   const {createUser} = useContext(AuthContext);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [accepted, setAccepted] = useState(false)
 
   const handleRegister =  event =>{
     event.preventDefault();
@@ -31,6 +32,10 @@ const Register = () => {
         console.log(error)
         setError(error.message);
       })
+  }
+
+  const handleAccepted = event=>{
+    setAccepted(event.target.checked)
   }
 
     return (
@@ -83,13 +88,18 @@ const Register = () => {
           </Form.Group>
           <Form.Group className="mb-3" id="formGridCheckbox">
             <Form.Check
+            onClick={handleAccepted}
               name="accept"
               type="checkbox"
-              label="Accept Term & Conditions"
+              label={
+                <>
+                  Accept <Link to="/terms">Term & Conditions</Link>
+                </>
+              }
             />
           </Form.Group>
           <div className="d-grid pt-2">
-            <Button type="submit" variant="secondary">
+            <Button disabled={!accepted} type="submit" variant="secondary">
               Register
             </Button>
           </div>

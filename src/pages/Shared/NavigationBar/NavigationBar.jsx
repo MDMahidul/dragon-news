@@ -48,7 +48,7 @@ const NavigationBar = () => {
               </Nav>
               <Nav>
                 {user && (
-                  <FaUserCircle style={{ fontSize: "2rem" }}></FaUserCircle>
+                  <FaUserCircle style={{ fontSize: "42px", paddingRight:'10px' }}></FaUserCircle>
                 )}
 
                 {user ? (
