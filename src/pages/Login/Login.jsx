@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
+  const {signIn} = useContext(AuthContext);
+  const [error,setError] = useState('');
+  const [success,setSuccess] = useState('');
+
+  const handleLogIn=(event)=>{
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(email,password);
+    signIn(email,password)
+      .then(result=>{
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        setSuccess('Logged in successfully!!!')
+        form.reset();
+      })
+      .catch(error=>{
+        console.log(error);
+        setError(error.message);
+      })
+  }
     return (
       <Container className="w-50 mx-auto bg-white p-4">
         <h3 className="text-center fw-bold text-secondary-emphasis pb-4">
           Login your account
         </h3>
         <hr className="py-2" />
-        <Form>
+        <Form onSubmit={handleLogIn}>
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label className="fw-semibold">Email address</Form.Label>
             <Form.Control
@@ -36,7 +60,7 @@ const Login = () => {
             </Button>
           </div>
           <br></br>
-          <Form.Text className="text-success">
+          <Form.Text>
             <div className="text-center">
               Don't have an account?{" "}
               <Link className="text-danger" to="/register">
@@ -44,8 +68,10 @@ const Login = () => {
               </Link>
             </div>
           </Form.Text>
-          <Form.Text className="text-success"></Form.Text>
-          <Form.Text className="text-danger"></Form.Text>
+          <div className="text-center mt-2">
+            <Form.Text className="text-success">{success}</Form.Text>
+            <Form.Text className="text-danger">{error}</Form.Text>
+          </div>
         </Form>
       </Container>
     );

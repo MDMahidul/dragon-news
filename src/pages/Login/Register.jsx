@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
+  const {createUser} = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleRegister =  event =>{
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const photo = form.photo.value;
+    const password = form.password.value;
+
+    console.log(name,email,photo,password);
+    if(password.length < 6){
+      setError('Password should be at least 6 digits!!!')
+    }
+    createUser(email,password)
+      .then(result=>{
+        const createdUser = result.user;
+        console.log(createdUser);
+        form.reset();
+        setSuccess('User Registered Successfully!!!')
+      })
+      .catch(error=>{
+        console.log(error)
+        setError(error.message);
+      })
+  }
+
     return (
       <Container className="w-50 mx-auto bg-white p-4">
         <h3 className="text-center fw-bold text-secondary-emphasis pb-4">
           Register your account
         </h3>
         <hr className="py-2 opacity-50" />
-        <Form>
+        <Form onSubmit={handleRegister}>
           <Form.Group className="mb-3" controlId="formGroupName">
             <Form.Label className="fw-semibold">Your Name</Form.Label>
             <Form.Control
@@ -24,8 +54,8 @@ const Register = () => {
             <Form.Label className="fw-semibold">Photo URL</Form.Label>
             <Form.Control
               className="bg-secondary-subtle bg-opacity-25"
-              name="photo url"
-              type="photo url"
+              name="photo"
+              type="text"
               placeholder="Enter photo url"
               required
             />
@@ -63,7 +93,7 @@ const Register = () => {
               Register
             </Button>
           </div>
-          <div className='text-center py-3'>
+          <div className="text-center py-3">
             <Form.Text className="text-success">
               Already have an account?
               <Link className="text-danger" to="/login">
@@ -71,8 +101,10 @@ const Register = () => {
               </Link>
             </Form.Text>
           </div>
-          <Form.Text className="text-success"></Form.Text>
-          <Form.Text className="text-danger"></Form.Text>
+          <div className="text-center mt-2">
+            <Form.Text className="text-success">{success}</Form.Text>
+            <Form.Text className="text-danger">{error}</Form.Text>
+          </div>
         </Form>
       </Container>
     );
